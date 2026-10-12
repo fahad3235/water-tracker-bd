@@ -1,0 +1,9 @@
+# water-tracker-bd — static site, no build output to ignore, but keep the usual suspects out
+node_modules/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

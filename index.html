@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Water Tracker BD — Daily Hydration Tracker</title>
+<meta name="description" content="Offline bilingual (EN/বাংলা) daily water intake tracker with goal ring, 7-day history and streaks.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="drop" aria-hidden="true">💧</span>
+    <div>
+      <h1 data-i18n="appTitle">Water Tracker BD</h1>
+      <p class="subtitle" data-i18n="subtitle">Track your daily hydration, offline.</p>
+    </div>
+  </div>
+  <button id="langToggle" class="lang-btn" type="button" aria-label="Switch language">বাংলা</button>
+</header>
+
+<main class="wrap">
+  <!-- TODAY / PROGRESS -->
+  <section class="card" id="todayCard" aria-labelledby="todayH">
+    <h2 id="todayH"><span data-i18n="today">Today</span>
+      <span class="streak-pill" title="">🔥 <span id="streakN">0</span> <span data-i18n="streakLabel">day streak</span></span>
+    </h2>
+
+    <div class="ring-row">
+      <svg class="ring" viewBox="0 0 160 160" role="img" aria-label="Goal progress">
+        <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
+        <circle class="ring-fg" id="ringFg" cx="80" cy="80" r="70"></circle>
+        <text class="ring-pct" id="ringPct" x="80" y="80">0%</text>
+        <text class="ring-sub" x="80" y="102" data-i18n="ofGoal">of goal</text>
+      </svg>
+      <div class="today-total">
+        <div class="total-line"><span id="totalMl">0</span><span class="unit" data-i18n="unit">ml</span></div>
+        <div class="goal-line"><span data-i18n="goalOf">of</span> <span id="goalMl">2000</span><span class="unit" data-i18n="unit2">ml</span> <span data-i18n="goalWord">goal</span></div>
+      </div>
+    </div>
+
+    <div class="quick-row" role="group" aria-label="Quick add">
+      <button type="button" class="qa" data-add="250">+250 <span data-i18n="unit3">ml</span></button>
+      <button type="button" class="qa" data-add="500">+500 <span data-i18n="unit4">ml</span></button>
+    </div>
+    <div class="custom-row">
+      <input id="customMl" type="text" inputmode="numeric" data-i18n-ph="customPh" placeholder="Custom amount (ml)" aria-label="Custom amount in ml">
+      <button type="button" id="customAdd" class="primary" data-i18n="add">Add</button>
+    </div>
+    <p id="amountErr" class="err" role="alert" hidden></p>
+
+    <div class="goal-row">
+      <label for="goalInput" data-i18n="goal">Daily goal</label>
+      <div class="goal-edit">
+        <input id="goalInput" type="text" inputmode="numeric" aria-label="Daily goal in ml">
+        <button type="button" id="goalSave" data-i18n="save">Save</button>
+      </div>
+    </div>
+    <p id="goalErr" class="err" role="alert" hidden></p>
+    <p id="goalOk" class="ok" role="status" hidden></p>
+  </section>
+
+  <!-- TODAY'S LOG -->
+  <section class="card" aria-labelledby="logH">
+    <h2 id="logH" data-i18n="logTitle">Today's log</h2>
+    <ul id="logList" class="log-list"></ul>
+    <p id="logEmpty" class="empty" data-i18n="emptyLog">Nothing logged today yet.</p>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="card" aria-labelledby="histH">
+    <h2 id="histH" data-i18n="history">Last 7 days</h2>
+    <div id="chart" class="chart" aria-label="7-day totals"></div>
+    <p id="histEmpty" class="empty" data-i18n="emptyHistory" hidden>No drinks logged yet — add your first glass!</p>
+  </section>
+
+  <!-- DATA -->
+  <section class="card" aria-labelledby="dataH">
+    <h2 id="dataH" data-i18n="dataTitle">Data</h2>
+    <div class="data-row">
+      <button type="button" id="exportBtn" data-i18n="export">Export JSON</button>
+      <label class="import-label">
+        <span data-i18n="import">Import JSON</span>
+        <input type="file" id="importFile" accept=".json,application/json" hidden>
+      </label>
+    </div>
+    <p id="ioMsg" class="ok" role="status" hidden></p>
+    <p class="reminder">💧 <span data-i18n="reminderNote">Reminders need this tab open — this app cannot send notifications in the background.</span></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <span data-i18n="footNote">100% offline — your data stays in this browser.</span>
+</footer>
+
+<script src="js/logic.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
